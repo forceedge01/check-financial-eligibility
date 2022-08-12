@@ -9,6 +9,10 @@ Given('I create an assessment with the following details:') do |table|
 
   assessment.assessment = table.rows_hash
 
+  if assessment.assessment.key?('proceeding_types')
+    assessment.assessment['proceeding_types'] = {'ccms_codes': assessment.assessment['proceeding_types'].split(';')}
+  end
+
   puts assessment.assessment
 end
 
@@ -27,7 +31,7 @@ Given('I add the following dependent details for the current assessment:') do |t
 
   puts '{:dependants=>[{:date_of_birth=>Thu, 20 Dec 2018, :in_full_time_education=>false, :relationship=>"child_relative", :monthly_income=>0.0, :assets_value=>0.0}]}'
 
-  assessment.dependants = { dependants: [table.rows_hash] }
+  assessment.dependants = { dependants: table.rows_hash }
 
   puts assessment.dependants
 end
@@ -37,7 +41,7 @@ Given('I add the following other_income details for {string} in the current asse
 
   puts '{:other_incomes=>[{:source=>"friends_or_family", :payments=>[{:date=>"2021-05-10", :amount=>100.0, :client_id=>"id1"}, {:date=>"2021-04-10", :amount=>100.0, :client_id=>"id2"}, {:date=>"2021-03-10", :amount=>100.0, :client_id=>"id3"}]}]}'
 
-  assessment.other_incomes = { other_incomes: {source: string, payments: [table.hashes]}}
+  assessment.other_incomes = { other_incomes: {source: string, payments: table.hashes}}
 
   puts assessment.other_incomes
 end
@@ -47,7 +51,7 @@ Given('I add the following irregular_income details in the current assessment:')
 
   puts '{:payments=>[{:income_type=>"student_loan", :frequency=>"annual", :amount=>120.0}]}'
 
-  assessment.irregular_incomes = {payments: [table.hashes]}
+  assessment.irregular_incomes = {payments: table.hashes}
 
   puts assessment.irregular_incomes
 end
@@ -67,7 +71,7 @@ Given('I add the following capital details for {string} in the current assessmen
 
   puts '{:bank_accounts=>[{:description=>"Bank acct 1", :value=>2999.0}, {:description=>"bank acct 2", :value=>0.0}, {:description=>"bank acct 3", :value=>0.0}], :non_liquid_capital=>[]}'
 
-  assessment.capital = {string: [table.hashes]}
+  assessment.capital = { "#{string}" => table.hashes}
 
   puts assessment.capital
 end
@@ -75,13 +79,19 @@ end
 When('I run the eligibility check on this data') do
   # Dispatch all API requests here.
   # table is a Cucumber::MultilineArgument::DataTable
-  page.driver.header "Content-Type", "application/json"
 
-  uri = assessment.get_uri(assessment.uri_sequence['assessment'])
-  payload = assessment.assessment.to_json
-
-  page.driver.post(uri, payload)
+  requestBag = RequestBag.new
+  requestBag.api_version = 5
   
-  puts payload
-  puts page.body
+  payload = assessment.assessment.to_json
+  request = assessment.get_request('create_assessment', payload)
+  
+  requestBag.add(request)
+
+  payload = assessment.applicant.to_json
+  request = assessment.get_request('add_applicant', payload)
+  requestBag.add(request)
+
+  requestBag.process
+  
 end

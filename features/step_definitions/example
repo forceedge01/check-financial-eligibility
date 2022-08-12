@@ -1,0 +1,154 @@
+>>> RUNNING TEST FFF_CFE_Integration_Tests_V4 (NP-Full-1) <<<
+>>>>>>>>>>>> /assessments V4 /Users/abdulqureshi/projects/check-financial-eligibility/spec/integration/test_runner_spec.rb:78 <<<<<<<<<<<<
+{:client_reference_id=>"NP-Full-1", :submission_date=>Mon, 10 May 2021, :proceeding_types=>{:ccms_codes=>["DA001", "SE013", "SE003"]}}
+{:success=>true, :assessment_id=>"f1eba9aa-9561-4321-aa56-a4d746112fa4", :errors=>[]}
+
+>>>>>>>>>>>> /assessments/f1eba9aa-9561-4321-aa56-a4d746112fa4/applicant V4 /Users/abdulqureshi/projects/check-financial-eligibility/spec/integration/test_runner_spec.rb:78 <<<<<<<<<<<<
+{:applicant=>{:date_of_birth=>Thu, 20 Dec 1979, :involvement_type=>"applicant", :has_partner_opponent=>false, :receives_qualifying_benefit=>false}}
+{:success=>true, :errors=>[]}
+
+>>>>>>>>>>>> /assessments/f1eba9aa-9561-4321-aa56-a4d746112fa4/capitals V4 /Users/abdulqureshi/projects/check-financial-eligibility/spec/integration/test_runner_spec.rb:78 <<<<<<<<<<<<
+{:bank_accounts=>[{:description=>"Bank acct 1", :value=>2999.0}, {:description=>"bank acct 2", :value=>0.0}, {:description=>"bank acct 3", :value=>0.0}], :non_liquid_capital=>[]}
+{:success=>true, :errors=>[]}
+
+>>>>>>>>>>>> /assessments/f1eba9aa-9561-4321-aa56-a4d746112fa4/dependants V4 /Users/abdulqureshi/projects/check-financial-eligibility/spec/integration/test_runner_spec.rb:78 <<<<<<<<<<<<
+{:dependants=>[{:date_of_birth=>Thu, 20 Dec 2018, :in_full_time_education=>false, :relationship=>"child_relative", :monthly_income=>0.0, :assets_value=>0.0}]}
+{:success=>true, :errors=>[]}
+
+>>>>>>>>>>>> /assessments/f1eba9aa-9561-4321-aa56-a4d746112fa4/irregular_incomes V4 /Users/abdulqureshi/projects/check-financial-eligibility/spec/integration/test_runner_spec.rb:78 <<<<<<<<<<<<
+{:payments=>[{:income_type=>"student_loan", :frequency=>"annual", :amount=>120.0}]}
+{:success=>true, :errors=>[]}
+
+>>>>>>>>>>>> /assessments/f1eba9aa-9561-4321-aa56-a4d746112fa4/other_incomes V4 /Users/abdulqureshi/projects/check-financial-eligibility/spec/integration/test_runner_spec.rb:78 <<<<<<<<<<<<
+{:other_incomes=>[{:source=>"friends_or_family", :payments=>[{:date=>"2021-05-10", :amount=>100.0, :client_id=>"id1"}, {:date=>"2021-04-10", :amount=>100.0, :client_id=>"id2"}, {:date=>"2021-03-10", :amount=>100.0, :client_id=>"id3"}]}]}
+{:success=>true, :errors=>[]}
+
+>>>>>>>>>>>> /assessments/f1eba9aa-9561-4321-aa56-a4d746112fa4/outgoings V4 /Users/abdulqureshi/projects/check-financial-eligibility/spec/integration/test_runner_spec.rb:78 <<<<<<<<<<<<
+{:outgoings=>[{:name=>"rent_or_mortgage", :payments=>[{:payment_date=>"2021-05-10", :amount=>10.0, :client_id=>"id7"}, {:payment_date=>"2021-04-10", :amount=>10.0, :client_id=>"id8"}, {:payment_date=>"2021-03-10", :amount=>10.0, :client_id=>"id9"}]}]}
+{:success=>true, :errors=>[]}
+
+>>>>>>>>>>>> /assessments/f1eba9aa-9561-4321-aa56-a4d746112fa4 /Users/abdulqureshi/projects/check-financial-eligibility/spec/integration/test_runner_spec.rb:69 <<<<<<<<<<<<
+{:version=>"4",
+ :timestamp=>"2022-08-11T14:18:12.283Z",
+ :success=>true,
+ :result_summary=>
+  {:overall_result=>
+    {:result=>"eligible",
+     :capital_contribution=>0.0,
+     :income_contribution=>0.0,
+     :matter_types=>[{:matter_type=>"domestic_abuse", :result=>"eligible"}, {:matter_type=>"section8", :result=>"eligible"}],
+     :proceeding_types=>[{:ccms_code=>"DA001", :result=>"eligible"}, {:ccms_code=>"SE013", :result=>"eligible"}, {:ccms_code=>"SE003", :result=>"eligible"}]},
+   :gross_income=>
+    {:total_gross_income=>110.0,
+     :proceeding_types=>[{:ccms_code=>"DA001", :upper_threshold=>999999999999.0, :result=>"eligible"}, {:ccms_code=>"SE013", :upper_threshold=>2657.0, :result=>"eligible"}, {:ccms_code=>"SE003", :upper_threshold=>2657.0, :result=>"eligible"}]},
+   :disposable_income=>
+    {:dependant_allowance=>298.08,
+     :gross_housing_costs=>10.0,
+     :housing_benefit=>0.0,
+     :net_housing_costs=>10.0,
+     :maintenance_allowance=>0.0,
+     :total_outgoings_and_allowances=>308.08,
+     :total_disposable_income=>-198.08,
+     :employment_income=>{:gross_income=>0.0, :benefits_in_kind=>0.0, :tax=>0.0, :national_insurance=>0.0, :fixed_employment_deduction=>0.0, :net_employment_income=>0.0},
+     :income_contribution=>0.0,
+     :proceeding_types=>
+      [{:ccms_code=>"DA001", :upper_threshold=>999999999999.0, :lower_threshold=>315.0, :result=>"eligible"},
+       {:ccms_code=>"SE013", :upper_threshold=>733.0, :lower_threshold=>315.0, :result=>"eligible"},
+       {:ccms_code=>"SE003", :upper_threshold=>733.0, :lower_threshold=>315.0, :result=>"eligible"}]},
+   :capital=>
+    {:total_liquid=>2999.0,
+     :total_non_liquid=>0.0,
+     :total_vehicle=>0.0,
+     :total_property=>0.0,
+     :total_mortgage_allowance=>999999999999.0,
+     :total_capital=>2999.0,
+     :pensioner_capital_disregard=>0.0,
+     :capital_contribution=>0.0,
+     :assessed_capital=>2999.0,
+     :proceeding_types=>
+      [{:ccms_code=>"DA001", :lower_threshold=>3000.0, :upper_threshold=>999999999999.0, :result=>"eligible"},
+       {:ccms_code=>"SE013", :lower_threshold=>3000.0, :upper_threshold=>8000.0, :result=>"eligible"},
+       {:ccms_code=>"SE003", :lower_threshold=>3000.0, :upper_threshold=>8000.0, :result=>"eligible"}]}},
+ :assessment=>
+  {:id=>"f1eba9aa-9561-4321-aa56-a4d746112fa4",
+   :client_reference_id=>"NP-Full-1",
+   :submission_date=>"2021-05-10",
+   :applicant=>{:date_of_birth=>"1979-12-20", :involvement_type=>"applicant", :has_partner_opponent=>false, :receives_qualifying_benefit=>false, :self_employed=>false},
+   :gross_income=>
+    {:employment_income=>[],
+     :irregular_income=>{:monthly_equivalents=>{:student_loan=>10.0}},
+     :state_benefits=>{:monthly_equivalents=>{:all_sources=>0.0, :cash_transactions=>0.0, :bank_transactions=>[]}},
+     :other_income=>
+      {:monthly_equivalents=>
+        {:all_sources=>{:friends_or_family=>100.0, :maintenance_in=>0.0, :property_or_lodger=>0.0, :pension=>0.0},
+         :bank_transactions=>{:friends_or_family=>100.0, :maintenance_in=>0.0, :property_or_lodger=>0.0, :pension=>0.0},
+         :cash_transactions=>{:friends_or_family=>0.0, :maintenance_in=>0.0, :property_or_lodger=>0.0, :pension=>0.0}}}},
+   :disposable_income=>
+    {:monthly_equivalents=>
+      {:all_sources=>{:child_care=>0.0, :rent_or_mortgage=>10.0, :maintenance_out=>0.0, :legal_aid=>0.0},
+       :bank_transactions=>{:child_care=>0.0, :rent_or_mortgage=>10.0, :maintenance_out=>0.0, :legal_aid=>0.0},
+       :cash_transactions=>{:child_care=>0.0, :rent_or_mortgage=>0.0, :maintenance_out=>0.0, :legal_aid=>0.0}},
+     :childcare_allowance=>0.0,
+     :deductions=>{:dependants_allowance=>298.08, :disregarded_state_benefits=>0.0}},
+   :capital=>
+    {:capital_items=>
+      {:liquid=>[{:description=>"Bank acct 1", :value=>2999.0}, {:description=>"bank acct 2", :value=>0.0}, {:description=>"bank acct 3", :value=>0.0}], :non_liquid=>[], :vehicles=>[], :properties=>{:main_home=>nil, :additional_properties=>[]}}},
+   :remarks=>{}}}
+                                                 NP-Full-1  Expected                   Actual
+                                                            =========                  =========
+                                         assessment_result  eligible                   eligible
+                               Matter type: domestic_abuse  eligible                   eligible
+                                     Matter type: section8  eligible                   eligible
+Proceeding_type DA001
+                                                    result  eligible                   eligible
+                                   capital lower threshold  3000.0                     3000.0
+                                   capital upper threshold  999999999999.0             999999999999.0
+                              gross income upper threshold  999999999999.0             999999999999.0
+                         disposable income lower threshold  315.0                      315.0
+                         disposable income upper threshold  999999999999.0             999999999999.0
+Proceeding_type SE013
+                                                    result  eligible                   eligible
+                                   capital lower threshold  3000.0                     3000.0
+                                   capital upper threshold  8000.0                     8000.0
+                              gross income upper threshold  2657.0                     2657.0
+                         disposable income lower threshold  315.0                      315.0
+                         disposable income upper threshold  733.0                      733.0
+Proceeding_type SE003
+                                                    result  eligible                   eligible
+                                   capital lower threshold  3000.0                     3000.0
+                                   capital upper threshold  8000.0                     8000.0
+                              gross income upper threshold  2657.0                     2657.0
+                         disposable income lower threshold  315.0                      315.0
+                         disposable income upper threshold  733.0                      733.0
+Gross income >>>>>>>>>>>>>>>>>>>>>>>>>
+                                      monthly other income  100.0                      100.0
+                                    monthly state benefits  0.0                        0.0
+                                      monthly student loan  10.0                       10.0
+                                   employment_income_gross                             0.0
+                        employment_income_benefits_in_kind                             0.0
+                                     employment_income_tax                             0.0
+                                     employment_income_nic                             0.0
+                                fixed_employment_allowance                             0.0
+                                        total gross income  110.0                      110.0
+Disposable income >>>>>>>>>>>>>>>>>>>>>>
+                                                 childcare  0.0                        0.0
+                                       dependant allowance  298.08                     298.08
+                                               maintenance  0.0                        0.0
+                                       gross_housing_costs  10.0                       10.0
+                                           housing benefit  0.0                        0.0
+                                         net housing costs  10.0                       10.0
+                            total outgoings and allowances  308.08                     308.08
+                                   total disposable income  -198.08                    -198.08
+                                       income contribution  0.0                        0.0
+Capital >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                                              total_liquid  2999.0                     2999.0
+                                          total_non_liquid  0.0                        0.0
+                                             total_vehicle  0.0                        0.0
+                                  total_mortgage_allowance  999999999999.0             999999999999.0
+                                             total_capital  2999.0                     2999.0
+                               pensioner_capital_disregard  0.0                        0.0
+                                          assessed_capital  2999.0                     2999.0
+                                      capital_contribution  0.0                        0.0
+Actual remaks returned from CFE >>>>>>>>>>>>>>>>>>>>>>>>>
+1 tests run successfully
+.

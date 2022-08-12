@@ -79,6 +79,8 @@ group :development, :test do
   gem "rubocop-performance"
   gem "timecop"
   gem "cucumber-rails", "~> 2.5", ">= 2.5.1", require: false
+  gem 'capybara-mechanize', '~> 1.12', '>= 1.12.1'
+  gem 'capybara', '~> 3.36', '>= 3.36.0'
 end
 
 group :development do
@@ -91,6 +93,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
   gem "cucumber-rails", "~> 2.5", ">= 2.5.1", require: false
+  gem 'capybara-mechanize', '~> 1.12', '>= 1.12.1'
+  gem 'capybara', '~> 3.36', '>= 3.36.0'
 end
 
 group :test do
@@ -102,6 +106,8 @@ group :test do
   gem "vcr"
   gem "webmock", ">= 3.13.0"
   gem "cucumber-rails", "~> 2.5", ">= 2.5.1", require: false
+  gem 'capybara-mechanize', '~> 1.12', '>= 1.12.1'
+  gem 'capybara', '~> 3.36', '>= 3.36.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

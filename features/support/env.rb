@@ -4,7 +4,12 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-require 'cucumber/rails'
+ENV["RAILS_ENV"] ||= "test"
+ENV["APP_ENV"] ||= "test"
+
+# require 'cucumber/rails'
+require 'capybara/cucumber'
+require 'capybara/mechanize'
 
 # frozen_string_literal: true
 
@@ -28,15 +33,25 @@ require 'cucumber/rails'
 # 2) Set the value below to true. Beware that doing this globally is not
 # recommended as it will mask a lot of errors for you!
 #
-ActionController::Base.allow_rescue = false
+# ActionController::Base.allow_rescue = false
+
+Capybara.register_driver :rack_test do |app|
+  Capybara::RackTest::Driver.new(app, headers: { 'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36' })
+end
+
+Capybara.register_driver :mechanize do |app|
+  Capybara::Mechanize::Driver.new(proc {})
+end
+
+Capybara.default_driver = :mechanize
 
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
-begin
-  DatabaseCleaner.strategy = :transaction
-rescue NameError
-  raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
-end
+# begin
+#   DatabaseCleaner.strategy = :transaction
+# rescue NameError
+#   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+# end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
 # See the DatabaseCleaner documentation for details. Example:
@@ -56,5 +71,5 @@ end
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
-Cucumber::Rails::Database.javascript_strategy = :truncation
+# Cucumber::Rails::Database.javascript_strategy = :truncation
 

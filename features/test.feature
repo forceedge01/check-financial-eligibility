@@ -2,17 +2,18 @@ Feature:
     "1. Fully eligible, 2. No contribution"
 
     Scenario: Test that the correct output is produced for the following set of data.
-        Given I am using version 4 of the API
+        # Given I am using version 5 of the API
         And I create an assessment with the following details:
-            | submission_date       | 2022-01-24        |
-            | proceeding_type_codes | DA001;SE013;SE003 |
+            | client_reference_id | HHH_CIT_2         |
+            | submission_date     | 2022-01-24        |
+            # | proceeding_types    | DA001;SE013;SE003 |
         And I add the following applicant details for the current assessment:
-            | date_of_birth               | 20/12/1979 |
+            | date_of_birth               | 1979-12-20 |
             | involvement_type            | applicant  |
-            | has_partner_opponent        | FALSE      |
-            | receives_qualifying_benefit | FALSE      |
+            | has_partner_opponent        | false      |
+            | receives_qualifying_benefit | false      |
         And I add the following dependent details for the current assessment:
-            | date_of_birth          | 20/12/2018     |
+            | date_of_birth          | 2018-12-20     |
             | in_full_time_education | FALSE          |
             | relationship           | child_relative |
             | monthly_income         | 0.00           |
@@ -23,8 +24,8 @@ Feature:
             | 10/04/2021 | id2       | 100.00 |
             | 10/03/2021 | id3       | 100.00 |
         And I add the following irregular_income details in the current assessment:
-            | income_type  | amount |
-            | student_loan | 120.00 |
+            | income_type  | frequency | amount |
+            | student_loan | annual    | 120.00 |
         And I add the following outgoing details for "rent_or_mortgage" in the current assessment:
             | payment_date | housing_cost_type | client_id | amount |
             | 10/05/2021   | rent              | id7       | 10.00  |
