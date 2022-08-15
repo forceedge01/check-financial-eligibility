@@ -1,97 +1,133 @@
 require_relative 'assessment'
+require_relative '../support/request'
 
 assessment = Assessment.new
+assessment.addHeader('Accept', 'application/json;version=5')
+requestBag = Request.new
+
+assessment_id = ''
+
+Given('I am using version {int} of the API') do |int|
+  page.driver.header "Accept", "application/json;version=#{int}"
+end
 
 Given('I create an assessment with the following details:') do |table|
   # table is a Cucumber::MultilineArgument::DataTable
 
-  puts '{:client_reference_id=>"NP-Full-1", :submission_date=>Mon, 10 May 2021, :proceeding_types=>{:ccms_codes=>["DA001", "SE013", "SE003"]}}'
+  # puts '{:client_reference_id=>"NP-Full-1", :submission_date=>Mon, 10 May 2021, :proceeding_types=>{:ccms_codes=>["DA001", "SE013", "SE003"]}}'
 
-  assessment.assessment = table.rows_hash
+  assessment.assessment = assessment.cleanse table.rows_hash
 
   if assessment.assessment.key?('proceeding_types')
     assessment.assessment['proceeding_types'] = {'ccms_codes': assessment.assessment['proceeding_types'].split(';')}
   end
 
-  puts assessment.assessment
+  payload = assessment.assessment.to_json
+  request = assessment.get_request_uri('create_assessment', payload)
+  requestBag.add(request)
+  response = requestBag.process
+
+  assessment_id = response['assessment_id']
+  requestBag.reset
 end
 
 Given('I add the following applicant details for the current assessment:') do |table|
   # table is a Cucumber::MultilineArgument::DataTable
 
-  puts '{:applicant=>{:date_of_birth=>Thu, 20 Dec 1979, :involvement_type=>"applicant", :has_partner_opponent=>false, :receives_qualifying_benefit=>false}}'
+  # puts '{:applicant=>{:date_of_birth=>Thu, 20 Dec 1979, :involvement_type=>"applicant", :has_partner_opponent=>false, :receives_qualifying_benefit=>false}}'
 
-  assessment.applicant = {applicant: table.rows_hash}
+  data = {"applicant": table.rows_hash}
+  assessment.applicant = assessment.cleanse data
 
-  puts assessment.applicant
+  payload = assessment.applicant.to_json
+  request = assessment.get_request_uri('add_applicant', payload, {'id' => assessment_id})
+  requestBag.add(request)
+  requestBag.process
+  requestBag.reset
 end
 
 Given('I add the following dependent details for the current assessment:') do |table|
   # table is a Cucumber::MultilineArgument::DataTable
 
-  puts '{:dependants=>[{:date_of_birth=>Thu, 20 Dec 2018, :in_full_time_education=>false, :relationship=>"child_relative", :monthly_income=>0.0, :assets_value=>0.0}]}'
+  # puts '{:dependants=>[{:date_of_birth=>Thu, 20 Dec 2018, :in_full_time_education=>false, :relationship=>"child_relative", :monthly_income=>0.0, :assets_value=>0.0}]}'
 
-  assessment.dependants = { dependants: table.rows_hash }
+  data = { "dependants": table.hashes }
+  assessment.dependants = assessment.cleanse data
 
-  puts assessment.dependants
+  payload = assessment.dependants.to_json
+  request = assessment.get_request_uri('add_dependants', payload, {'id' => assessment_id})
+  requestBag.add(request)
+  requestBag.process
+  requestBag.reset
 end
 
 Given('I add the following other_income details for {string} in the current assessment:') do |string, table|
   # table is a Cucumber::MultilineArgument::DataTable
 
-  puts '{:other_incomes=>[{:source=>"friends_or_family", :payments=>[{:date=>"2021-05-10", :amount=>100.0, :client_id=>"id1"}, {:date=>"2021-04-10", :amount=>100.0, :client_id=>"id2"}, {:date=>"2021-03-10", :amount=>100.0, :client_id=>"id3"}]}]}'
+  # puts '{:other_incomes=>[{:source=>"friends_or_family", :payments=>[{:date=>"2021-05-10", :amount=>100.0, :client_id=>"id1"}, {:date=>"2021-04-10", :amount=>100.0, :client_id=>"id2"}, {:date=>"2021-03-10", :amount=>100.0, :client_id=>"id3"}]}]}'
 
-  assessment.other_incomes = { other_incomes: {source: string, payments: table.hashes}}
+  data = { "other_incomes": {"source": string, "payments": table.hashes}}
+  assessment.other_incomes = assessment.cleanse data
 
-  puts assessment.other_incomes
+  payload = assessment.other_incomes.to_json
+  request = assessment.get_request_uri('add_other_incomes', payload, {'id' => assessment_id})
+  requestBag.add(request)
+  requestBag.process
+  requestBag.reset
 end
 
 Given('I add the following irregular_income details in the current assessment:') do |table|
   # table is a Cucumber::MultilineArgument::DataTable
 
-  puts '{:payments=>[{:income_type=>"student_loan", :frequency=>"annual", :amount=>120.0}]}'
+  # puts '{:payments=>[{:income_type=>"student_loan", :frequency=>"annual", :amount=>120.0}]}'
 
-  assessment.irregular_incomes = {payments: table.hashes}
+  data = {"payments": table.hashes}
+  assessment.irregular_incomes = assessment.cleanse data
 
-  puts assessment.irregular_incomes
+  payload = assessment.irregular_incomes.to_json
+  request = assessment.get_request_uri('add_irregular_incomes', payload, {'id' => assessment_id})
+  requestBag.add(request)
+  requestBag.process
+  requestBag.reset
 end
 
 Given('I add the following outgoing details for {string} in the current assessment:') do |string, table|
   # table is a Cucumber::MultilineArgument::DataTable
 
-  puts '{:outgoings=>[{:name=>"rent_or_mortgage", :payments=>[{:payment_date=>"2021-05-10", :amount=>10.0, :client_id=>"id7"}, {:payment_date=>"2021-04-10", :amount=>10.0, :client_id=>"id8"}, {:payment_date=>"2021-03-10", :amount=>10.0, :client_id=>"id9"}]}]}'
+  # puts '{:outgoings=>[{:name=>"rent_or_mortgage", :payments=>[{:payment_date=>"2021-05-10", :amount=>10.0, :client_id=>"id7"}, {:payment_date=>"2021-04-10", :amount=>10.0, :client_id=>"id8"}, {:payment_date=>"2021-03-10", :amount=>10.0, :client_id=>"id9"}]}]}'
 
-  assessment.outgoings = {outgoings: [name: string, payments: table.hashes]}
+  data = {"outgoings": ["name": string, "payments": table.hashes]}
+  assessment.outgoings = assessment.cleanse data
 
-  puts assessment.outgoings
+  payload = assessment.outgoings.to_json
+  request = assessment.get_request_uri('add_outgoings', payload, {'id' => assessment_id})
+  requestBag.add(request)
+  requestBag.process
+  requestBag.reset
 end
 
 Given('I add the following capital details for {string} in the current assessment:') do |string, table|
   # table is a Cucumber::MultilineArgument::DataTable
 
-  puts '{:bank_accounts=>[{:description=>"Bank acct 1", :value=>2999.0}, {:description=>"bank acct 2", :value=>0.0}, {:description=>"bank acct 3", :value=>0.0}], :non_liquid_capital=>[]}'
+  # puts '{:bank_accounts=>[{:description=>"Bank acct 1", :value=>2999.0}, {:description=>"bank acct 2", :value=>0.0}, {:description=>"bank acct 3", :value=>0.0}], :non_liquid_capital=>[]}'
 
-  assessment.capital = { "#{string}" => table.hashes}
+  data = { "#{string}" => table.hashes}
+  assessment.capital = assessment.cleanse data
 
-  puts assessment.capital
+  payload = assessment.capital.to_json
+  request = assessment.get_request_uri('add_capitals', payload, {'id' => assessment_id})
+  requestBag.add(request)
+  requestBag.process
+  requestBag.reset
 end
 
-When('I run the eligibility check on this data') do
+When('I retrieve the final assessment') do
   # Dispatch all API requests here.
-  # table is a Cucumber::MultilineArgument::DataTable
 
-  requestBag = RequestBag.new
-  requestBag.api_version = 5
-  
-  payload = assessment.assessment.to_json
-  request = assessment.get_request('create_assessment', payload)
-  
+  request = assessment.get_request_uri('get_assessment', {}, {'id' => assessment_id})
   requestBag.add(request)
+  response = requestBag.process
+  requestBag.reset
 
-  payload = assessment.applicant.to_json
-  request = assessment.get_request('add_applicant', payload)
-  requestBag.add(request)
-
-  requestBag.process
-  
+  puts response
 end

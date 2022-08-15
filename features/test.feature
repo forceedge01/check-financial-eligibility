@@ -4,20 +4,22 @@ Feature:
     Scenario: Test that the correct output is produced for the following set of data.
         # Given I am using version 5 of the API
         And I create an assessment with the following details:
-            | client_reference_id | HHH_CIT_2         |
-            | submission_date     | 2022-01-24        |
+            | client_reference_id | HHH_CIT_2  |
+            | submission_date     | 2022-01-24 |
             # | proceeding_types    | DA001;SE013;SE003 |
         And I add the following applicant details for the current assessment:
             | date_of_birth               | 1979-12-20 |
             | involvement_type            | applicant  |
             | has_partner_opponent        | false      |
             | receives_qualifying_benefit | false      |
+        And I add the following capital details for "bank_accounts" in the current assessment:
+            | description | value  |
+            | Bank acc 1  | 2999.0 |
+            | Bank acc 2  | 0      |
+            | Bank acc 3  | 0      |
         And I add the following dependent details for the current assessment:
-            | date_of_birth          | 2018-12-20     |
-            | in_full_time_education | FALSE          |
-            | relationship           | child_relative |
-            | monthly_income         | 0.00           |
-            | assets_value           | 0.00           |
+            | date_of_birth | in_full_time_education | relationship   | monthly_income | assets_value |
+            | 2018-12-20    | FALSE                  | child_relative | 0.00           | 0.00         |
         And I add the following other_income details for "friends_and_family" in the current assessment:
             | date       | client_id | amount |
             | 10/05/2021 | id1       | 100.00 |
@@ -31,12 +33,7 @@ Feature:
             | 10/05/2021   | rent              | id7       | 10.00  |
             | 10/04/2021   | rent              | id8       | 10.00  |
             | 10/03/2021   | rent              | id9       | 10.00  |
-        And I add the following capital details for "bank_accounts" in the current assessment:
-            | description | value   |
-            | Bank acc 1  | 2,999.0 |
-            | Bank acc 2  | 0       |
-            | Bank acc 3  | 0       |
-        When I run the eligibility check on this data
+        When I retrieve the final assessment
 
 
         Then I should see the following assement results:
