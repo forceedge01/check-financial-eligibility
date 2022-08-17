@@ -13,6 +13,8 @@ require 'capybara/mechanize'
 
 # frozen_string_literal: true
 
+Capybara.app_host = "http://127.0.0.1:3000" 
+
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
 # selectors in your step definitions to use the XPath syntax.
