@@ -81,6 +81,7 @@ group :development, :test do
   gem "cucumber-rails", "~> 2.5", ">= 2.5.1", require: false
   gem 'capybara-mechanize', '~> 1.12', '>= 1.12.1'
   gem 'capybara', '~> 3.36', '>= 3.36.0'
+  gem 'allure-cucumber'
 end
 
 group :development do

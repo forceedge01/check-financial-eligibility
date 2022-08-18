@@ -10,10 +10,24 @@ ENV["APP_ENV"] ||= "test"
 # require 'cucumber/rails'
 require 'capybara/cucumber'
 require 'capybara/mechanize'
+require "allure-cucumber"
 
+AllureCucumber.configure do |config|
+  config.results_directory = "features/allureReport"
+  config.clean_results_directory = true
+  config.logging_level = Logger::ERROR
+  config.logger = Logger.new($stdout, Logger::ERROR)
+  config.environment = "staging"
+  DEFAULT_ISSUE_PREFIX    = '@ISSUE:'
+  DEFAULT_SEVERITY_PREFIX = '@SEVERITY:'
+  config.environment_properties = {
+  Test_Environment: "UAT"}
+
+  config.categories = File.new("features/support/Categories/customCategories.json")
+end
 # frozen_string_literal: true
 
-Capybara.app_host = "http://127.0.0.1:3000" 
+Capybara.app_host = "http://127.0.0.1:3000"
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
