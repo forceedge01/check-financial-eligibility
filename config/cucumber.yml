@@ -6,6 +6,6 @@ std_opts = "--format #{ENV['CUCUMBER_FORMAT'] || 'pretty'} --strict --tags 'not 
 %>
 #
 #default: <%= std_opts %> features --publish-quiet
-default: --profile html_report  --profile allure_report
+default: --profile html_report
 html_report:    --format progress --format html --out features/HTML_report/report.html
 allure_report:  --format pretty --publish-quiet --color --format AllureCucumber::CucumberFormatter --out features/allureReport
