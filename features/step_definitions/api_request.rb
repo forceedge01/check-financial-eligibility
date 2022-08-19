@@ -1,7 +1,8 @@
-assessment = Assessment.new
 request_dispatcher = Request.new
+assessment = nil
 
 Given('I am using version {int} of the API') do |int|
+  assessment = Assessment.new
   assessment.api_version int
 end
 
@@ -88,14 +89,14 @@ When('I retrieve the final assessment') do
 end
 
 Then('I should see the following overall summary:') do |table|
-  if assessment.response.empty? || assessment.version.nil?
+  if assessment.nil? || assessment.response.empty? || assessment.version.nil?
     raise 'The reponse and version must be set before using this step definition.'
   end
 
   failures = []
   table.hashes.each do | row |
     result = get_value_from_response assessment.response, assessment.version, row['attribute']
-    valid_or_message = validate_response result, row['value'], assessment.version, row['attribute']
+    valid_or_message = validate_response result, row['value'], assessment.version, row['attribute'], assessment_id: assessment.id
 
     unless valid_or_message == true
       failures.append valid_or_message
@@ -111,7 +112,7 @@ end
 
 # To be used where the response has an array and you're asserting a block within it based on a conditional value within.
 Then('I should see the following {string} details where {string}:') do |attribute, condition, table|
-  if assessment.response.empty? || assessment.version.nil?
+  if assessment.nil? || assessment.response.empty? || assessment.version.nil?
     raise 'The reponse and version must be set before using this step definition.'
   end
 
@@ -133,7 +134,7 @@ Then('I should see the following {string} details where {string}:') do |attribut
 
   failures = []
   table.hashes.each do | row |
-    valid_or_message = validate_response selectedItem[row['attribute']], row['value'], assessment.version, attribute, condition
+    valid_or_message = validate_response selectedItem[row['attribute']], row['value'], assessment.version, attribute, assessment.id, condition: condition
 
     unless valid_or_message == true
       failures.append valid_or_message

@@ -4,7 +4,7 @@ Feature:
     Scenario: Test that the correct output is produced for the following set of data.
         Given I am using version 5 of the API
         And I create an assessment with the following details:
-            | client_reference_id | NP-FULL-2  |
+            | client_reference_id | NP-FULL-1  |
             | submission_date     | 2021-05-10 |
         And I add the following applicant details for the current assessment:
             | date_of_birth               | 1979-12-20 |
@@ -34,14 +34,14 @@ Feature:
             | 2021-03-10   | rent              | id9       | 10.00  |
         And I add the following capital details for "bank_accounts" in the current assessment:
             | description | value  |
-            | Bank acc 1  | 2999.0 |
+            | Bank acc 1  | 4999.0 |
             | Bank acc 2  | 0      |
             | Bank acc 3  | 0      |
         When I retrieve the final assessment
 
         Then I should see the following overall summary:
             | attribute                    | value    |
-            | assessment_result            | eligible |
+            | assessment_result            | contribution_required |
             | capital_lower_threshold      | 3000.0   |
             | gross_income_upper_threshold | 2657.0   |
 

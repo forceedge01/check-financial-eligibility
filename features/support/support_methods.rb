@@ -16,14 +16,14 @@ def print_failures failures
   	end
 end
 
-def validate_response result, value, version, attribute, condition = ''
+def validate_response result, value, version, attribute, assessment_id, condition = ''
 	if value.to_s != result.to_s
 		mapping = get_mapping version, attribute
 		unless condition.empty?
 			attribute += ".X/where[#{condition}"
 		end
 
-     	return "\n==> [#{attribute}] Value mismatch. Expected (++), Actual (--): \n++ #{value}\n-- #{result}\n\nmapping to '#{mapping}' in the JSON response."
+     	return "\n==> [#{attribute}] Value mismatch. Expected (++), Actual (--): \n++ #{value}\n-- #{result}\n\nmapping to '#{mapping}' in the JSON response. Assessment id '#{assessment_id}'"
     end
 
     return true
