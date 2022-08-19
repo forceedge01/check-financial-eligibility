@@ -77,15 +77,7 @@ RSpec.describe "IntegrationTests::TestRunner", type: :request do
     def noisy_post(url, payload, version)
       puts ">>>>>>>>>>>> #{url} V#{version} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow unless silent?
       pp payload if noisy?
-
-      puts url
-      puts payload.to_json
-      puts headers(version)
-
-      response = post url, params: payload.to_json, headers: headers(version)
-
-      puts response.inspect
-
+      post url, params: payload.to_json, headers: headers(version)
       pp parsed_response if noisy?
       puts " \n" if noisy?
       raise "Unsuccessful response: #{parsed_response.inspect}" unless parsed_response[:success]

@@ -52,7 +52,6 @@ private
   end
 
   def url(request)
-    puts "#{SERVER_HOST}#{request[:path]}"
     "#{SERVER_HOST}#{request[:path]}"
   end
 
