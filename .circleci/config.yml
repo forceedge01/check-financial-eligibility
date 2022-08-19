@@ -176,13 +176,12 @@ jobs:
       - *restore_gems_cache
       - *install_gems
       - *save_gems_cache
-      - *setup_database
       - run:
           name: Start rails server
           command: |
             bin/rails server
-            sleep 10
           background: true
+      - *setup_database
       - run:
           name: Run cucumber tests
           command: |
