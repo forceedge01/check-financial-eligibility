@@ -181,6 +181,7 @@ jobs:
           name: Start rails server
           command: |
             bin/rails server
+            sleep 10
           background: true
       - run:
           name: Run cucumber tests
