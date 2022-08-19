@@ -185,7 +185,6 @@ jobs:
       - run:
           name: Run cucumber tests
           command: |
-            ./tmp/cc-test-reporter before-build
             bundle exec cucumber --format html --out report.html --format pretty
       - store_artifacts:
           path: ./report.html
