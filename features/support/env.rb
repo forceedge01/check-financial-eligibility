@@ -15,8 +15,6 @@ require "allure-cucumber"
 AllureCucumber.configure do |config|
   config.results_directory = "features/allureReport"
   config.clean_results_directory = true
-  config.logging_level = Logger::ERROR
-  config.logger = Logger.new($stdout, Logger::ERROR)
   config.environment = "staging"
   DEFAULT_ISSUE_PREFIX    = '@ISSUE:'
   DEFAULT_SEVERITY_PREFIX = '@SEVERITY:'
