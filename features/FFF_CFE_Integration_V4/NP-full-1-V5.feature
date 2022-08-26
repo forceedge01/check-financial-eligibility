@@ -10,7 +10,7 @@ Feature:
             | date_of_birth               | 1979-12-20 |
             | involvement_type            | applicant  |
             | has_partner_opponent        | false      |
-            | receives_qualifying_benefit | endof      |
+            | receives_qualifying_benefit | wrong      |
         And I add the following proceeding types in the current assessment:
             | ccms_code | client_involvement_type |
             | DA001     | A                       |
@@ -18,7 +18,7 @@ Feature:
             | SE003     | A                       |
         And I add the following dependent details for the current assessment:
             | date_of_birth | in_full_time_education | relationship   | monthly_income | assets_value |
-            | 2018-12-20    | FALSE                  | child_relative | 0.00           | 0.00         |
+            | 2018-12-20    | else                  | child_relative | 0.00           | 0.00         |
         And I add the following other_income details for "friends_or_family" in the current assessment:
             | date       | client_id | amount |
             | 2021-05-10 | id1       | 100.00 |
@@ -36,7 +36,7 @@ Feature:
             | description | value  |
             | Bank acc 1  | 2999.0 |
             | Bank acc 2  | 0      |
-            | Bank acc 3  | 0      |
+            | Bank acc 3  | shiz      |
         When I retrieve the final assessment
 
         Then I should see the following overall summary:
