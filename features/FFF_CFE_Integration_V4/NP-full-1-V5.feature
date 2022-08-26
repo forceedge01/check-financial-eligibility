@@ -10,7 +10,7 @@ Feature:
             | date_of_birth               | 1979-12-20 |
             | involvement_type            | applicant  |
             | has_partner_opponent        | false      |
-            | receives_qualifying_benefit | true      |
+            | receives_qualifying_benefit | false      |
         And I add the following proceeding types in the current assessment:
             | ccms_code | client_involvement_type |
             | DA001     | A                       |
