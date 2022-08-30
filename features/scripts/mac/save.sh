@@ -42,7 +42,7 @@ git diff --cached
 
 git branch
 
-echo 'Name your changes (Jira-ref/name). Leave empty if current one suffices.'
+echo "Name your changes (Jira-ref/name). Leave empty if current (${CURRENT_BRANCH}) one suffices."
 read BRANCH
 echo "Summary of your changes (max 1 line)"
 read COMMENT

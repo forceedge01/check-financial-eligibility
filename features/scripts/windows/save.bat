@@ -49,7 +49,7 @@ PAUSE
 
 git branch
 
-set /p BRANCH=READ-USER -Prompt "Name your changes (Jira-ref/name)"
+set /p BRANCH=READ-USER -Prompt "Name your changes (Jira-ref/name). Leave empty if current (%CURRENT_BRANCH%) one suffices."
 set /p COMMENT=READ-USER -Prompt "Summary of your changes (max 1 line)"
 
 if [%BRANCH%] == [] (
