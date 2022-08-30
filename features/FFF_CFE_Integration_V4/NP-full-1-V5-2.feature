@@ -21,7 +21,7 @@ Feature:
             | 2018-12-20    | FALSE                  | child_relative | 0.00           | 0.00         |
         And I add the following other_income details for "friends_or_family" in the current assessment:
             | date       | client_id | amount |
-            | 2021-05-10 | id1       | 100.00 |
+            | 2021-05-10 | id3       | 100.00 |
             | 2021-04-10 | id2       | 100.00 |
             | 2021-03-10 | id3       | 100.00 |
         And I add the following irregular_income details in the current assessment:
