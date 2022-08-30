@@ -198,6 +198,7 @@ To run the tests
 bundle exec cucumber
 ```
 
+For convenience, we've also introduced git abstracted scripts for Windows based non-dev users. These can be found in the features folder. You will need to setup the `CUCUMBER_REPO_PATH` environment variable to get these scripts working. The name of the file describes the interaction it will perform. For example, save.bat is short for creating a branch, committing and pushing to Github repo.
 
 ## Replaying live API interactions for debugging purposes
 
