@@ -23,7 +23,7 @@ Feature:
             | date       | client_id | amount |
             | 2021-05-10 | id1       | 100.00 |
             | 2021-04-10 | id2       | 100.00 |
-            | 2021-03-10 | id3       | 100.00 |
+            | 2021-03-10 | id3       | 990.00 |
         And I add the following irregular_income details in the current assessment:
             | income_type  | frequency | amount |
             | student_loan | annual    | 120.00 |

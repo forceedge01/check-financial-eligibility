@@ -15,7 +15,7 @@ Feature:
             | ccms_code | client_involvement_type |
             | DA001     | A                       |
             | SE013     | A                       |
-            | SE003     | A                       |
+            | SE002     | A                       |
         And I add the following dependent details for the current assessment:
             | date_of_birth | in_full_time_education | relationship   | monthly_income | assets_value |
             | 2018-12-20    | FALSE                  | child_relative | 0.00           | 0.00         |
@@ -31,7 +31,7 @@ Feature:
             | payment_date | housing_cost_type | client_id | amount |
             | 2021-05-10   | rent              | id7       | 10.00  |
             | 2021-04-10   | rent              | id8       | 10.00  |
-            | 2021-03-10   | rent              | id9       | 10.00  |
+            | 2021-03-05   | rent              | id9       | 10.00  |
         And I add the following capital details for "bank_accounts" in the current assessment:
             | description | value  |
             | Bank acc 1  | 4999.0 |
