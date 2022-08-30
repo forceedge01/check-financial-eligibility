@@ -31,12 +31,12 @@ Feature:
             | payment_date | housing_cost_type | client_id | amount |
             | 2021-05-10   | rent              | id7       | 10.00  |
             | 2021-04-10   | rent              | id8       | 10.00  |
-            | 2021-03-10   | rent              | id9       | 10.00  |
+            | 2021-03-10   | rent              | id9       | 9 .00  |
         And I add the following capital details for "bank_accounts" in the current assessment:
             | description | value  |
             | Bank acc 1  | 2999.0 |
-            | Bank acc 2  | 0      |
-            | Bank acc 3  | 0      |
+            | Bank acc 2  | 1      |
+            | Bank acc 3  | 1      |
         When I retrieve the final assessment
 
         Then I should see the following overall summary:
