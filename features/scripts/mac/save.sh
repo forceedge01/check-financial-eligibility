@@ -7,13 +7,13 @@ fi
 
 cd $CUCUMBER_REPO_PATH
 
-CURRENT_BRANCH=$('git rev-parse --abbrev-ref HEAD')
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 git add features
-CHANGES=$('git diff --cached')
+CHANGES=$(git diff --cached)
 
-if [[ ! -z $CHANGES ]]; then
+if [[ -z $CHANGES ]]; then
 
-    UNPUSHED_COMMITS=$('git log --branches --not --remotes')
+    UNPUSHED_COMMITS=$(git log --branches --not --remotes)
     
     echo "$UNPUSHED_COMMITS"
 
@@ -35,14 +35,14 @@ if [[ ! -z $CHANGES ]]; then
     exit
 fi
 
-git diff --cached
-
-echo '### PLEASE REVIEW YOUR CHANGES ABOVE'
+echo '### PLEASE REVIEW YOUR CHANGES'
 read -p 'Press any key to continue...'
+
+git diff --cached
 
 git branch
 
-echo 'Name your changes (Jira-ref/name)'
+echo 'Name your changes (Jira-ref/name). Leave empty if current one suffices.'
 read BRANCH
 echo "Summary of your changes (max 1 line)"
 read COMMENT
